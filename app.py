@@ -8,8 +8,12 @@ import json
 import uuid
 from urllib.request import urlopen
 import urllib
+from flask_cors import CORS
+
+
 
 app = Flask(__name__)
+CORS(app)
 
 CONNECTION_STRING = "mongodb+srv://inigo:prueba@cluster0.0lpx0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 client = pymongo.MongoClient(CONNECTION_STRING, ssl_cert_reqs=ssl.CERT_NONE)
@@ -32,5 +36,7 @@ def list_cuestionario():
     cuestionario = covid_collection.find()
     response=[todo for todo in cuestionario]
     return json.dumps(response, default=json_util.default)
+
+
 
 
